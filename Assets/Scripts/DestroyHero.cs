@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+//временный скрипт, для того, чтобы герой попадая вне зоны карты, не летел бесконечно
 public class DestroyHero : MonoBehaviour
 {
     MoveHero MH;

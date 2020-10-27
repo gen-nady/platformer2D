@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7504744042182450628}
   - component: {fileID: 7504744042182450651}
   - component: {fileID: 7504744042182450630}
-  - component: {fileID: 7504744042182450631}
+  - component: {fileID: 9039534887853210425}
   m_Layer: 9
   m_Name: FireRight
   m_TagString: HeroMagicAttack
@@ -4772,7 +4772,7 @@ CircleCollider2D:
   m_Offset: {x: 0.0028402223, y: -0.007256031}
   serializedVersion: 2
   m_Radius: 0.8039786
---- !u!114 &7504744042182450631
+--- !u!114 &9039534887853210425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4781,8 +4781,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7504744042182450649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23a15911776bebd42b00c8d2bd07abd4, type: 3}
+  m_Script: {fileID: 11500000, guid: ee2d7e8eab99429459f543080e0fd7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveDir: {x: 1, y: 0}
   Speed: 10
+  MoveDir: {x: 1, y: 0}

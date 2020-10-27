@@ -42,58 +42,34 @@ public class MoveHero : MonoBehaviour
     public void MoveRightHero()
     {
         SpeedGame = Speed;
+        AnimationFalse();
         AnimCharacterMove.SetBool("MoveRight", true); //анимация 
-        AnimCharacterMove.SetBool("MoveLeft", false);
-        MoveHeroBool();
     }
     public void MoveLeftHero()
     {
         SpeedGame = -Speed;
+        AnimationFalse();
         AnimCharacterMove.SetBool("MoveLeft", true);
-        AnimCharacterMove.SetBool("MoveRight", false);
-        MoveHeroBool();
     }
-    //анимация 
-    void MoveHeroBool()
-    {
-        AnimCharacterMove.SetBool("JumpLeft", false);
-        AnimCharacterMove.SetBool("JumpRight", false);
-        AnimCharacterMove.SetBool("StayLeft", false);
-        AnimCharacterMove.SetBool("StayRight", false);
-        AnimCharacterMove.SetBool("AttackLeft", false);
-        AnimCharacterMove.SetBool("AttackRight", false);
-    }  
     public void MoveStopHero()
     {
-
         if (SrHero.flipX == true)
         {
+            AnimationFalse();
             AnimCharacterMove.SetBool("StayLeft", true);//анимация 
-            AnimCharacterMove.SetBool("StayRight", false);
-            MoveStopHeroSetBool();
         }
         else if (SrHero.flipX == false)
         {
+            AnimationFalse();
             AnimCharacterMove.SetBool("StayRight", true);//анимация 
-            AnimCharacterMove.SetBool("StayLeft", false);
-            MoveStopHeroSetBool();
         }     
         SpeedGame = 0;
-    }
-    //анимация 
-    void MoveStopHeroSetBool()
-    {
-        AnimCharacterMove.SetBool("JumpRight", false);
-        AnimCharacterMove.SetBool("JumpLeft", false);
-        AnimCharacterMove.SetBool("MoveRight", false);
-        AnimCharacterMove.SetBool("MoveLeft", false);
-        AnimCharacterMove.SetBool("AttackLeft", false);
-        AnimCharacterMove.SetBool("AttackRight", false);
     }
     public void MoveJumpHero()
     {
         if (IsGrounded && !IsStairs)
         {
+            AnimationFalse();
             //проверка какую анимацию проигрывать
             if (SrHero.flipX == true)
             {
@@ -103,31 +79,20 @@ public class MoveHero : MonoBehaviour
             {
                 AnimCharacterMove.SetBool("JumpRight", true);
             }
-            AnimCharacterMove.SetBool("MoveLeft", false); //анимация 
-            AnimCharacterMove.SetBool("MoveRight", false);
-            AnimCharacterMove.SetBool("StayLeft", false);
-            AnimCharacterMove.SetBool("StayRight", false);
-            AnimCharacterMove.SetBool("AttackLeft", false);
-            AnimCharacterMove.SetBool("AttackRight", false);
             RbHero.AddForce(new Vector2(0, JumpImpulse), ForceMode2D.Impulse);
             MoveStopHero();
         }
     }
-
-    //проверка для прыжка
-    private void OnCollisionEnter2D(Collision2D coll)
+    void AnimationFalse()
     {
-        if (coll.gameObject.tag == "Ground")
-        {
-            IsGrounded = true;
-        }
-    }
-    private void OnCollisionExit2D(Collision2D coll)
-    {
-        if (coll.gameObject.tag == "Ground")
-        {
-            IsGrounded = false;
-        }
+        AnimCharacterMove.SetBool("JumpLeft", false);
+        AnimCharacterMove.SetBool("JumpRight", false);
+        AnimCharacterMove.SetBool("MoveLeft", false); //анимация 
+        AnimCharacterMove.SetBool("MoveRight", false);
+        AnimCharacterMove.SetBool("StayLeft", false);
+        AnimCharacterMove.SetBool("StayRight", false);
+        AnimCharacterMove.SetBool("AttackLeft", false);
+        AnimCharacterMove.SetBool("AttackRight", false);
     }
     public void HeroAttack()
     {
@@ -143,6 +108,7 @@ public class MoveHero : MonoBehaviour
     }
     IEnumerator DamageWait()
     {
+        AnimationFalse();
         if (SrHero.flipX == true)
         {
             AttackPositionLeft.SetActive(true);
@@ -153,27 +119,36 @@ public class MoveHero : MonoBehaviour
             AttackPositionRight.SetActive(true);
             AnimCharacterMove.SetBool("AttackRight", true);
         }
-        AnimCharacterMove.SetBool("MoveLeft", false); //анимация 
-        AnimCharacterMove.SetBool("MoveRight", false);
-        AnimCharacterMove.SetBool("StayLeft", false);
-        AnimCharacterMove.SetBool("StayRight", false);
-        AnimCharacterMove.SetBool("JumpLeft", false);
-        AnimCharacterMove.SetBool("JumpRight", false);
         yield return new WaitForSeconds(0.8f);
         AttackPositionRight.SetActive(false);
         AttackPositionLeft.SetActive(false);
         MoveStopHero();   
     }
-    //сбор монеток
-    private void OnTriggerEnter2D(Collider2D coll)
+    //проверка для прыжка
+    private void OnCollisionEnter2D(Collision2D coll)
     {
+        if (coll.gameObject.tag == "Ground")
+        {
+            IsGrounded = true;
+        }
         if (coll.gameObject.tag == "Coin")
         {
             Coin++;
             CoinT.text = Coin.ToString();
             Destroy(coll.gameObject);
         }
-        if (coll.gameObject.tag == "EnemyAttack")
+    }
+    private void OnCollisionExit2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Ground")
+        {
+            IsGrounded = false;
+        }
+    }
+    //сбор монеток
+    private void OnTriggerEnter2D(Collider2D coll)
+    {       
+        if (coll.gameObject.CompareTag("EnemyAttack"))
         {
             Damage(1);
             Destroy(coll.gameObject);
@@ -183,6 +158,7 @@ public class MoveHero : MonoBehaviour
     {
         if (coll.gameObject.tag == "Stairs")
         {
+            Debug.Log("1");
             IsStairs = true;
         }
     }
