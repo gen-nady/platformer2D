@@ -10,7 +10,7 @@ TagManager:
   - HeroMagicAttack
   - Hero
   - HeroSwordAttack
-  - Stairs
+  - Ladder
   layers:
   - Default
   - TransparentFX

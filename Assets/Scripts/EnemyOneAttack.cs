@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyOneAttack : MonoBehaviour
-{
+{   
     public Transform ShootPoint;
     public GameObject Bullet, Coin;
     public int LifePoints;
-    static MagicFire MF;
+    Animator AnimCharacterMove;
     void Start()
     {
-        MF = GameObject.Find("Hero").GetComponent<MagicFire>();
+        AnimCharacterMove = GetComponent<Animator>();
         InvokeRepeating("Shoot", 0.8f, 1); //0.8 поскольку в анимации на 0.8 секунду начинает срабатывать атака
     }
     private void FixedUpdate()
@@ -23,6 +23,7 @@ public class EnemyOneAttack : MonoBehaviour
     //выстрел врага
     void Shoot()
     {
+        AnimCharacterMove.SetBool("EnemyOneIsDamage", false);
         GameObject bulletInstantiate = Instantiate(Bullet, ShootPoint.position, Quaternion.identity) as GameObject;
         Destroy(bulletInstantiate, 2);
     }
@@ -37,8 +38,16 @@ public class EnemyOneAttack : MonoBehaviour
     }
     void Dead()
     {
+        StartCoroutine(DeadFX());
+    }
+    IEnumerator DeadFX()
+    {
+
+        AnimCharacterMove.SetBool("EnemyOneIsDead", true);
+        yield return new WaitForSeconds(0.4f);
         Destroy(gameObject);
         GameObject coinInstantiate = Instantiate(Coin, transform.position, Quaternion.identity) as GameObject;
+
     }
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -47,12 +56,13 @@ public class EnemyOneAttack : MonoBehaviour
             Damage(5);
             Destroy(coll.gameObject);
         }
-       
+
     }
-    private void OnTriggerEnter2D(Collider2D coll) 
+    private void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("HeroSwordAttack")) //при соприкосновении с мечом, получает урон равный 1
         {
+            AnimCharacterMove.SetBool("EnemyOneIsDamage", true);
             Damage(1);
         }
     }

@@ -15,11 +15,11 @@ public class MoveHero : MonoBehaviour
     [Header("Монеты")]
     public Text CoinT;
     int Coin;
-    int LifePoints=100;
+    int LifePoints=15;
     public GameObject AttackPositionRight;
     public GameObject AttackPositionLeft;
     bool IsStairs = false;
-    Vector2 MoveDir = new Vector2(0,1);
+    bool IsStairsGo = false;
     void Start()
     {
         SrHero = GetComponent<SpriteRenderer>();
@@ -30,10 +30,11 @@ public class MoveHero : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!IsStairs)
+        if (IsStairs && IsStairsGo)
         {
-            transform.Translate(SpeedGame * Time.fixedDeltaTime, 0, 0);
+            RbHero.velocity = new Vector2(0, 10);
         }
+        RbHero.velocity = new Vector2(SpeedGame, RbHero.velocity.y);
         if (LifePoints == 0)
         {
             Dead();
@@ -67,8 +68,9 @@ public class MoveHero : MonoBehaviour
     }
     public void MoveJumpHero()
     {
+        IsStairsGo = true;
         if (IsGrounded && !IsStairs)
-        {
+        {          
             AnimationFalse();
             //проверка какую анимацию проигрывать
             if (SrHero.flipX == true)
@@ -79,8 +81,8 @@ public class MoveHero : MonoBehaviour
             {
                 AnimCharacterMove.SetBool("JumpRight", true);
             }
-            RbHero.AddForce(new Vector2(0, JumpImpulse), ForceMode2D.Impulse);
-            MoveStopHero();
+            RbHero.AddForce(new Vector2(0, JumpImpulse));
+            IsStairsGo = false;
         }
     }
     void AnimationFalse()
@@ -93,9 +95,10 @@ public class MoveHero : MonoBehaviour
         AnimCharacterMove.SetBool("StayRight", false);
         AnimCharacterMove.SetBool("AttackLeft", false);
         AnimCharacterMove.SetBool("AttackRight", false);
+        IsStairsGo = false;
     }
     public void HeroAttack()
-    {
+    {    
         StartCoroutine(DamageWait());       
     }
     public void Damage(int dmg)
@@ -119,10 +122,9 @@ public class MoveHero : MonoBehaviour
             AttackPositionRight.SetActive(true);
             AnimCharacterMove.SetBool("AttackRight", true);
         }
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.1f);
         AttackPositionRight.SetActive(false);
-        AttackPositionLeft.SetActive(false);
-        MoveStopHero();   
+        AttackPositionLeft.SetActive(false); 
     }
     //проверка для прыжка
     private void OnCollisionEnter2D(Collision2D coll)
@@ -156,15 +158,14 @@ public class MoveHero : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Stairs")
+        if (coll.gameObject.tag == "Ladder")
         {
-            Debug.Log("1");
             IsStairs = true;
         }
     }
     private void OnTriggerExit2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Stairs")
+        if (coll.gameObject.tag == "Ladder")
         {
             IsStairs = false;
         }
