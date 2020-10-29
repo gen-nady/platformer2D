@@ -419,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16871798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.95, y: 6, z: -30.488281}
+  m_LocalPosition: {x: -18.95, y: 6, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1625524008}
@@ -1309,7 +1309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111768258}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.719572, y: 12.113186, z: -1.0371094}
+  m_LocalPosition: {x: -18.61, y: 12.113186, z: -1.0371094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 951392380}
@@ -1588,7 +1588,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146103772}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.64, y: 6, z: -30.488281}
+  m_LocalPosition: {x: 38.64, y: 6, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1625524008}
@@ -4108,7 +4108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432150397}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 76.96, y: -20, z: -30.488281}
+  m_LocalPosition: {x: 76.96, y: -20, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1625524008}
@@ -6237,7 +6237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635858687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.16, y: -20, z: -30.488281}
+  m_LocalPosition: {x: 27.16, y: -20, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1625524008}
@@ -12843,7 +12843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198412685}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.8, y: -20, z: -30.488281}
+  m_LocalPosition: {x: -22.8, y: -20, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1625524008}
@@ -13360,6 +13360,21 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1912227594}
           m_MethodName: MoveJumpHero
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1912227594}
+          m_MethodName: IsStairsV
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -14549,7 +14564,7 @@ PrefabInstance:
     - target: {fileID: 2689678808405507828, guid: 819c2a8cee669bd4d91f9c5df639cdc6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.8602
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2689678808405507828, guid: 819c2a8cee669bd4d91f9c5df639cdc6,
         type: 3}
@@ -19277,6 +19292,7 @@ GameObject:
   - component: {fileID: 1912227599}
   - component: {fileID: 1912227600}
   - component: {fileID: 1912227601}
+  - component: {fileID: 1912227602}
   m_Layer: 8
   m_Name: Hero
   m_TagString: Hero
@@ -19296,8 +19312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590456c80050564692a3291f2fc4f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  JumpImpulse: 2250
+  Speed: 275
+  JumpImpulse: 2500
   CoinT: {fileID: 510311720}
   AttackPositionRight: {fileID: 1990339119}
   AttackPositionLeft: {fileID: 387165299}
@@ -19403,7 +19419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912227593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.07, y: 3.05, z: 0}
+  m_LocalPosition: {x: -29.08, y: 3.13, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -19428,8 +19444,8 @@ Rigidbody2D:
   m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
-  m_Material: {fileID: 0}
+  m_GravityScale: 6
+  m_Material: {fileID: 6200000, guid: 27fddb498b16fe84e9a110da5bba3111, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -19477,7 +19493,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912227593}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -19496,6 +19512,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16794173, y: 0.30964997}
   m_EdgeRadius: 0
+--- !u!70 &1912227602
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912227593}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.03}
+  m_Size: {x: 0.2, y: 0.32}
+  m_Direction: 0
 --- !u!1001 &1919390183
 PrefabInstance:
   m_ObjectHideFlags: 0
