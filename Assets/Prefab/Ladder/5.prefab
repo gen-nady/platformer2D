@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2880070301432454726}
   - component: {fileID: 6976300883582130074}
   - component: {fileID: 7724249303748792927}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 5
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -106,5 +106,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.15, y: 0.32}
   m_EdgeRadius: 0

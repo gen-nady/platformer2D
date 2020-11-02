@@ -4,22 +4,22 @@ public class ShootHero : MonoBehaviour
 {
     public Transform ShootPoint;
     public GameObject BulletLeft, BulletRight;
-    static SpriteRenderer SrHero;
+    static MoveHero MvHero;
     private void Start()
     {
-        SrHero = GetComponent<SpriteRenderer>();    
+        MvHero = GameObject.FindWithTag("Hero").GetComponent<MoveHero>();  
     }
     public void Shoot()
     {
-        if (SrHero.flipX == true)
+        if (!MvHero.IsHeroRight)
         {
             GameObject bulletInstantiate = Instantiate(BulletLeft, ShootPoint.position, Quaternion.identity) as GameObject;
             Destroy(bulletInstantiate, 4);
         }
-        else if (SrHero.flipX == false)
+        else if (MvHero.IsHeroRight)
         {
             GameObject bulletInstantiate = Instantiate(BulletRight, ShootPoint.position, Quaternion.identity) as GameObject;
             Destroy(bulletInstantiate, 4);
-        }      
+        }
     }
 }

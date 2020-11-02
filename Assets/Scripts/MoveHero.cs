@@ -11,18 +11,18 @@ public class MoveHero : MonoBehaviour
     [Header("Движение")]
     public float Speed;
     public Transform GroundCheck;
-    float GroundRadius = 0.2f;
+    static readonly float GroundRadius = 0.2f;
     public LayerMask WhatIsGround;
     int Move;
-    bool IsHeroRight = true;
+    public bool IsHeroRight = true;
     bool IsGrounded;
     [Header("Атака")]
     bool IsReadyAttackHero = true;
-    public GameObject AttackPositionRight;
-    public GameObject AttackPositionLeft;
+    public GameObject AttackPosition;
     [Header("Монеты")]
     public Text CoinT;
     int Coin;
+    [Header("Жизни")]
     int LifePoints = 100;
     [Header("Лестницы")]
     bool IsStairs = false;
@@ -40,7 +40,7 @@ public class MoveHero : MonoBehaviour
         AnimCharacterMove.SetFloat("Speed", Mathf.Abs(Move));
         if (IsStairs && IsStairsGo)
         {
-            RbHero.velocity = new Vector2(0, Speed * Time.fixedDeltaTime);
+            RbHero.velocity = new Vector2(0, 175*Time.fixedDeltaTime);
         }
         RbHero.velocity = new Vector2(Move * Speed, RbHero.velocity.y);
         if (Move > 0 && !IsHeroRight)
@@ -79,14 +79,13 @@ public class MoveHero : MonoBehaviour
     public void MoveJumpHero()
     {
         IsStairsGo = true;
-        if (IsGrounded)
+        if (IsGrounded &&!IsStairs)
         {
             //устанавливаем в аниматоре переменную в false
             AnimCharacterMove.SetBool("Ground", false);
             //прикладываем силу вверх, чтобы персонаж подпрыгнул
-            RbHero.AddForce(new Vector2(0, 600));
+            RbHero.AddForce(new Vector2(0, 475));
         }
-        IsStairsGo = false;
     }
     public void IsStairsV()
     {
@@ -94,7 +93,7 @@ public class MoveHero : MonoBehaviour
     }
     public void HeroAttack()
     {
-        if (IsReadyAttackHero)
+        if (IsReadyAttackHero && IsGrounded)
         {
             AnimCharacterMove.SetBool("Attack", true);
             IsReadyAttackHero = false;
@@ -111,32 +110,23 @@ public class MoveHero : MonoBehaviour
     }
     IEnumerator DamageWait()
     {
-        if (!IsHeroRight)
-        {
-            AttackPositionLeft.SetActive(true);
-        }
-        else if (IsHeroRight)
-        {
-            AttackPositionRight.SetActive(true);
-        }
+        AttackPosition.SetActive(true);
         yield return new WaitForSeconds(0.35f);
-        AttackPositionRight.SetActive(false);
-        AttackPositionLeft.SetActive(false);
+        AttackPosition.SetActive(false);
         AnimCharacterMove.SetBool("Attack", false);
         IsReadyAttackHero = true;
     }
     //проверка для прыжка
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Coin")
+        if (coll.gameObject.CompareTag("Coin"))
         {
             Coin++;
             CoinT.text = Coin.ToString();
             Destroy(coll.gameObject);
         }
     }
-    //сбор монеток
-    private void OnTriggerEnter2D(Collider2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("EnemyAttack"))
         {
@@ -144,21 +134,23 @@ public class MoveHero : MonoBehaviour
             Destroy(coll.gameObject);
         }
     }
-    private void OnTriggerStay2D(Collider2D coll)
+
+    void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Ladder")
+        if (coll.gameObject.CompareTag("Ladder"))
         {
             IsStairs = true;
-            RbHero.gravityScale = 0.1f;
-        }
+            RbHero.gravityScale = 0.4f;
+        }   
     }
-    private void OnTriggerExit2D(Collider2D coll)
+    void OnTriggerExit2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Ladder")
+        if (coll.gameObject.CompareTag("Ladder"))
         {
             IsStairs = false;
-            RbHero.gravityScale = 1f;
+            RbHero.gravityScale = 1f;      
         }
+
     }
     void Dead()
     {
