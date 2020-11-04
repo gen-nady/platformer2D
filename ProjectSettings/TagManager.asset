@@ -12,6 +12,7 @@ TagManager:
   - HeroSwordAttack
   - Ladder
   - GroundFly
+  - Potions
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class MoveHero : MonoBehaviour
@@ -23,7 +22,9 @@ public class MoveHero : MonoBehaviour
     public Text CoinT;
     int Coin;
     [Header("Жизни")]
-    int LifePoints = 100;
+    int LifePoints = 3;
+    [SerializeField]
+    Image[] Life_Point, LifePointSprite;
     [Header("Лестницы")]
     bool IsStairs = false;
     bool IsStairsGo = false;
@@ -55,6 +56,21 @@ public class MoveHero : MonoBehaviour
         if (LifePoints == 0)
         {
             Dead();
+        }
+        ChangeLife();
+    }
+    void ChangeLife()
+    {
+        for (int i = 0; i < Life_Point.Length; i++)
+        {
+            if (i < LifePoints)
+            {
+                Life_Point[i].sprite = LifePointSprite[0].sprite;
+            }
+            else
+            {
+                Life_Point[i].sprite = LifePointSprite[1].sprite;
+            }
         }
     }
     private void Flip()
@@ -103,6 +119,7 @@ public class MoveHero : MonoBehaviour
     public void Damage(int dmg)
     {
         LifePoints -= dmg;
+        ChangeLife();
         if (LifePoints < 0)
         {
             LifePoints = 0;
@@ -133,8 +150,13 @@ public class MoveHero : MonoBehaviour
             Damage(1);
             Destroy(coll.gameObject);
         }
+        if (coll.gameObject.CompareTag("Potions"))
+        {
+            LifePoints += 2;
+            ChangeLife();
+            Destroy(coll.gameObject);
+        }
     }
-
     void OnTriggerStay2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("Ladder"))
@@ -150,11 +172,11 @@ public class MoveHero : MonoBehaviour
             IsStairs = false;
             RbHero.gravityScale = 1f;      
         }
-
     }
     void Dead()
     {
         SaveGame();
+        Application.LoadLevel(0);
         Destroy(gameObject);
     }
     //сохранение игры

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemyOneAttack : MonoBehaviour
 {   
     public Transform ShootPoint;
@@ -47,7 +46,6 @@ public class EnemyOneAttack : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         Destroy(gameObject);
         GameObject coinInstantiate = Instantiate(Coin, transform.position, Quaternion.identity) as GameObject;
-
     }
     void OnCollisionEnter2D(Collision2D coll)
     {
