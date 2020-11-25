@@ -517,6 +517,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1280063206}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &25069176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 25069177}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &25069177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25069176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -24.690153, y: 2.42, z: -0.8968523}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &27496559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5876947067449205350, guid: e5a13be9418601143b3037797fa3d2ee,
@@ -25556,10 +25586,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5628846873892792136, guid: 7058b097e7d599849a9a6128ca1a98f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5628846873892792138, guid: 7058b097e7d599849a9a6128ca1a98f7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.5
+      value: -11.53
       objectReference: {fileID: 0}
     - target: {fileID: 5628846873892792138, guid: 7058b097e7d599849a9a6128ca1a98f7,
         type: 3}
@@ -28480,10 +28515,10 @@ GameObject:
   - component: {fileID: 1768070154}
   - component: {fileID: 1768070159}
   - component: {fileID: 1768070158}
-  - component: {fileID: 1768070157}
   - component: {fileID: 1768070156}
+  - component: {fileID: 1768070157}
   - component: {fileID: 1768070155}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnemySkelet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28498,15 +28533,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768070153}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.18, y: 2.96, z: 0}
+  m_LocalPosition: {x: -24.87, y: 3.03, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 1195758162}
   m_Father: {fileID: 243108889}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1768070155
-BoxCollider2D:
+--- !u!70 &1768070155
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -28518,19 +28553,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01842995, y: -0.035385773}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.22, y: 0.32}
-    newSize: {x: 0.47, y: 0.35}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1831401, y: 0.24922845}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.033404496, y: -0.053199973}
+  m_Size: {x: 0.1729862, y: 0.21360105}
+  m_Direction: 0
 --- !u!50 &1768070156
 Rigidbody2D:
   serializedVersion: 4
@@ -28551,7 +28576,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1768070157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28561,13 +28586,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1768070153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4021bb9bcefdb84eb559be982506386, type: 3}
+  m_Script: {fileID: 11500000, guid: 93ca74659cec1054bba7cf7f2ad33f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPoint: {fileID: 1195758162}
-  Bullet: {fileID: 7843118948080407804, guid: 43860898b1466fd418fc48164315fdf8, type: 3}
-  Coin: {fileID: 5628846873892792136, guid: 7058b097e7d599849a9a6128ca1a98f7, type: 3}
-  LifePoints: 5
+  AnimCharacterMove: {fileID: 1768070158}
+  RbSkeleton: {fileID: 1768070156}
+  Area: {fileID: 25069176}
+  Speed: 3
 --- !u!95 &1768070158
 Animator:
   serializedVersion: 3
@@ -28625,7 +28650,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -5784503621931760760, guid: c393b7dc36b3f1d42a896dd9ec80eb6a,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
