@@ -11,15 +11,20 @@ public class ShootHero : MonoBehaviour
     }
     public void Shoot()
     {
-        if (!MvHero.IsHeroRight)
+        if (MvHero.manaPoints > 0)
         {
-            GameObject bulletInstantiate = Instantiate(BulletLeft, ShootPoint.position, Quaternion.identity) as GameObject;
-            Destroy(bulletInstantiate, 4);
-        }
-        else if (MvHero.IsHeroRight)
-        {
-            GameObject bulletInstantiate = Instantiate(BulletRight, ShootPoint.position, Quaternion.identity) as GameObject;
-            Destroy(bulletInstantiate, 4);
+            MvHero.manaPoints--;
+            MvHero.ChangeLife();
+            if (!MvHero.IsHeroRight)
+            {
+                GameObject bulletInstantiate = Instantiate(BulletLeft, ShootPoint.position, Quaternion.identity) as GameObject;
+                Destroy(bulletInstantiate, 4);
+            }
+            else if (MvHero.IsHeroRight)
+            {
+                GameObject bulletInstantiate = Instantiate(BulletRight, ShootPoint.position, Quaternion.identity) as GameObject;
+                Destroy(bulletInstantiate, 4);
+            }
         }
     }
 }

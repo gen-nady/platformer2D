@@ -24,7 +24,9 @@ public class MoveHero : MonoBehaviour
     [Header("Жизни")]
     int LifePoints = 3;
     [SerializeField]
-    Image[] Life_Point, LifePointSprite;
+    public int manaPoints = 3;
+    [SerializeField]
+    Image[] Life_Point, LifePointSprite, manaPoint,manaPointSprite;
     [Header("Лестницы")]
     bool IsStairs = false;
     bool IsStairsGo = false;
@@ -33,6 +35,8 @@ public class MoveHero : MonoBehaviour
         Coin = PlayerPrefs.GetInt("Coin");
         CoinT.text = Coin.ToString();
     }
+
+    [System.Obsolete]
     void FixedUpdate()
     {
         IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundRadius, WhatIsGround);
@@ -59,8 +63,12 @@ public class MoveHero : MonoBehaviour
         }
         ChangeLife();
     }
-    void ChangeLife()
+    public void ChangeLife()
     {
+        if (LifePoints > 3)
+            LifePoints = 3;
+        if (manaPoints > 3)
+            manaPoints = 3;
         for (int i = 0; i < Life_Point.Length; i++)
         {
             if (i < LifePoints)
@@ -70,6 +78,17 @@ public class MoveHero : MonoBehaviour
             else
             {
                 Life_Point[i].sprite = LifePointSprite[1].sprite;
+            }
+        }
+        for (int i = 0; i < manaPoint.Length; i++)
+        {
+            if (i < manaPoints)
+            {
+                manaPoint[i].sprite = manaPointSprite[0].sprite;
+            }
+            else
+            {
+                manaPoint[i].sprite = manaPointSprite[1].sprite;
             }
         }
     }
@@ -143,6 +162,8 @@ public class MoveHero : MonoBehaviour
             Destroy(coll.gameObject);
         }
     }
+
+    [System.Obsolete]
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("EnemyAttack"))
@@ -150,11 +171,26 @@ public class MoveHero : MonoBehaviour
             Damage(1);
             Destroy(coll.gameObject);
         }
+        if (coll.gameObject.CompareTag("EnemyAttackSword"))
+        {
+            Damage(1);
+        }
         if (coll.gameObject.CompareTag("Potions"))
         {
             LifePoints += 2;
             ChangeLife();
             Destroy(coll.gameObject);
+        }
+        if (coll.gameObject.CompareTag("Mana"))
+        {
+            manaPoints++;
+            ChangeLife();
+            Destroy(coll.gameObject);
+        }
+        if (coll.gameObject.CompareTag("Exit"))
+        {
+            SaveGame();
+            Application.LoadLevel(0);
         }
     }
     void OnTriggerStay2D(Collider2D coll)
@@ -173,6 +209,8 @@ public class MoveHero : MonoBehaviour
             RbHero.gravityScale = 1f;      
         }
     }
+
+    [System.Obsolete]
     void Dead()
     {
         SaveGame();

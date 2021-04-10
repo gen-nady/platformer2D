@@ -10,7 +10,7 @@ public class EnemyOneAttack : MonoBehaviour
     void Start()
     {
         AnimCharacterMove = GetComponent<Animator>();
-        InvokeRepeating("Shoot", 0.8f, 1); //0.8 поскольку в анимации на 0.8 секунду начинает срабатывать атака
+        InvokeRepeating("Shoot",0.8f,2.5f); //0.8 поскольку в анимации на 0.8 секунду начинает срабатывать атака
     }
     private void FixedUpdate()
     {

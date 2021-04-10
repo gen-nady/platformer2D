@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1124031446819914745}
   - component: {fileID: 1124031446819914746}
   - component: {fileID: 1124031446819914747}
+  - component: {fileID: 463072238892593110}
   m_Layer: 0
   m_Name: EnemyOne
   m_TagString: Untagged
@@ -81,6 +82,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -143,7 +145,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124031446819914740}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -183,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootPoint: {fileID: 1124031446355033360}
-  Bullet: {fileID: 7843118948080407804, guid: 43860898b1466fd418fc48164315fdf8, type: 3}
+  Bullet: {fileID: 7504744042182450649, guid: e1671dbf8c0b4cf4ab3098da5ebba0e4, type: 3}
   Coin: {fileID: 5628846873892792136, guid: 7058b097e7d599849a9a6128ca1a98f7, type: 3}
   LifePoints: 5
 --- !u!50 &1124031446819914747
@@ -207,3 +209,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &463072238892593110
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124031446819914740}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.47, y: 0.35}
+    newSize: {x: 0.47, y: 0.35}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.47, y: 0.35}
+  m_EdgeRadius: 0

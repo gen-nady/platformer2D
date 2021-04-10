@@ -7,10 +7,12 @@ public class DestroyHero : MonoBehaviour
     {
         MH = GameObject.Find("Hero").GetComponent<MoveHero>();
     }
+
+    [System.Obsolete]
     private void OnTriggerEnter2D(Collider2D collision)
     {
         MH.SaveGame();
-        Destroy(collision.gameObject);
+        Destroy(collision.gameObject);  
         Application.LoadLevel(0);
     }
 }

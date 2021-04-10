@@ -13,6 +13,9 @@ TagManager:
   - Ladder
   - GroundFly
   - Potions
+  - EnemyAttackSword
+  - Mana
+  - Exit
   layers:
   - Default
   - TransparentFX
