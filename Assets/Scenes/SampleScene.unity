@@ -7172,22 +7172,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590456c80050564692a3291f2fc4f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RbHero: {fileID: 1912227598}
-  AnimCharacterMove: {fileID: 1912227599}
-  Speed: 5
-  GroundCheck: {fileID: 50443719}
-  WhatIsGround:
+  rbHero: {fileID: 1912227598}
+  animCharacterMove: {fileID: 1912227599}
+  speed: 5
+  groundCheck: {fileID: 50443719}
+  whatIsGround:
     serializedVersion: 2
     m_Bits: 3072
-  IsHeroRight: 1
-  AttackPosition: {fileID: 1990339119}
-  CoinT: {fileID: 510311720}
+  isHeroRight: 1
+  attackPosition: {fileID: 1990339119}
+  coinText: {fileID: 510311720}
   manaPoints: 3
-  Life_Point:
+  lifePoint:
   - {fileID: 236002616}
   - {fileID: 1255218099}
   - {fileID: 1031724315}
-  LifePointSprite:
+  lifePointSprite:
   - {fileID: 681736648924790280, guid: 406571c889dd56543ac8e44a024c90d0, type: 3}
   - {fileID: 5872070073303797977, guid: 1cd3d7a19d78c6f4c830384e49b568e1, type: 3}
   manaPoint:
@@ -7318,10 +7318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97856eb71d3d44c459c4f5dc311c43f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPoint: {fileID: 239441614}
-  BulletLeft: {fileID: 7504744042182450649, guid: 2f68dedaba3f7b24d96287ef76c05663,
+  shootPoint: {fileID: 239441614}
+  bulletLeft: {fileID: 7504744042182450649, guid: 2f68dedaba3f7b24d96287ef76c05663,
     type: 3}
-  BulletRight: {fileID: 7504744042182450649, guid: 188325368ce4f1d4688a2ceecf43eb41,
+  bulletRight: {fileID: 7504744042182450649, guid: 188325368ce4f1d4688a2ceecf43eb41,
     type: 3}
 --- !u!70 &1912227602
 CapsuleCollider2D:

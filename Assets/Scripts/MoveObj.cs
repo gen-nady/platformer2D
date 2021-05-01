@@ -2,10 +2,10 @@
 
 public class MoveObj : MonoBehaviour
 {
-    public float Speed;
-    public Vector2 MoveDir;
+    public float speed;
+    public Vector2 moveDir;
     void FixedUpdate()
     {
-            transform.Translate(MoveDir * Speed * Time.fixedDeltaTime); //движение объекта
+            transform.Translate(moveDir * speed * Time.fixedDeltaTime); //движение объекта
     }   
 }

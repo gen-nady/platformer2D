@@ -2,27 +2,27 @@
 
 public class ShootHero : MonoBehaviour
 {
-    public Transform ShootPoint;
-    public GameObject BulletLeft, BulletRight;
-    static MoveHero MvHero;
+    public Transform shootPoint;
+    public GameObject bulletLeft, bulletRight;
+    static MoveHero mvHero;
     private void Start()
     {
-        MvHero = GameObject.FindWithTag("Hero").GetComponent<MoveHero>();  
+        mvHero = GetComponent<MoveHero>();  
     }
     public void Shoot()
     {
-        if (MvHero.manaPoints > 0)
+        if (mvHero.manaPoints > 0)
         {
-            MvHero.manaPoints--;
-            MvHero.ChangeLife();
-            if (!MvHero.IsHeroRight)
+            mvHero.manaPoints--;
+            mvHero.ChangeLife();
+            if (!mvHero.isHeroRight)
             {
-                GameObject bulletInstantiate = Instantiate(BulletLeft, ShootPoint.position, Quaternion.identity) as GameObject;
+                GameObject bulletInstantiate = Instantiate(bulletLeft, shootPoint.position, Quaternion.identity) as GameObject;
                 Destroy(bulletInstantiate, 4);
             }
-            else if (MvHero.IsHeroRight)
+            else if (mvHero.isHeroRight)
             {
-                GameObject bulletInstantiate = Instantiate(BulletRight, ShootPoint.position, Quaternion.identity) as GameObject;
+                GameObject bulletInstantiate = Instantiate(bulletRight, shootPoint.position, Quaternion.identity) as GameObject;
                 Destroy(bulletInstantiate, 4);
             }
         }

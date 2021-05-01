@@ -187,14 +187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ca74659cec1054bba7cf7f2ad33f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimCharacterMove: {fileID: 7857065717419954776}
-  RbSkeleton: {fileID: 7857065717419954778}
-  Speed: 2
-  Range: 1
-  HeroTrigger: 0
+  animCharacterMove: {fileID: 7857065717419954776}
+  rbSkeleton: {fileID: 7857065717419954778}
+  speed: 2
+  range: 1
+  heroTrigger: 0
   shootPoint: {fileID: 7857065716914068487}
-  LifePoints: 0
-  coin: {fileID: 0}
+  lifePoints: 3
+  coin: {fileID: 5628846873892792136, guid: 7058b097e7d599849a9a6128ca1a98f7, type: 3}
 --- !u!70 &7857065717419954781
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -4,21 +4,21 @@ using UnityEngine;
 public class EnemySkeleton : MonoBehaviour
 {
     [SerializeField]
-    Animator AnimCharacterMove;
+    Animator animCharacterMove;
     [SerializeField]
-    Rigidbody2D RbSkeleton;
+    Rigidbody2D rbSkeleton;
     [SerializeField]
-    float Speed;
+    float speed;
     [SerializeField]
-    float Range;
-    public bool HeroTrigger;
+    float range;
+    public bool heroTrigger;
     public GameObject shootPoint;
     bool isReadyAttack = true;
-    public int LifePoints;
+    public int lifePoints;
     public GameObject coin;
     private void FixedUpdate()
     {
-        if (LifePoints == 0)
+        if (lifePoints == 0)
         {
             Dead();
         }
@@ -28,52 +28,52 @@ public class EnemySkeleton : MonoBehaviour
         RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector3.right, 6f, LayerMask.GetMask("Player"));
         if (hitShootLeft.transform != null || hitShootRight.transform != null)
         {
-            Speed = 0f;
-            RbSkeleton.velocity = new Vector2(0f, RbSkeleton.velocity.y);
+            speed = 0f;
+            rbSkeleton.velocity = new Vector2(0f, rbSkeleton.velocity.y);
             if (isReadyAttack)
             {
                 
                 isReadyAttack = false;
-                AnimCharacterMove.SetBool("Attack", true);
+                animCharacterMove.SetBool("Attack", true);
                 StartCoroutine(DamageWait());
             }
 
         }
         else if (hitLeft.transform != null)
         {
-            Speed = 2f;
-            RbSkeleton.velocity = new Vector2(Vector3.left.x *Speed, RbSkeleton.velocity.y);
+            speed = 2f;
+            rbSkeleton.velocity = new Vector2(Vector3.left.x *speed, rbSkeleton.velocity.y);
             Vector3 theScale = transform.localScale;
-            AnimCharacterMove.SetFloat("Speed", Mathf.Abs(Speed));
+            animCharacterMove.SetFloat("Speed", Mathf.Abs(speed));
             if (theScale.x > 0)
             {
                 theScale.x *= -1;
                 transform.localScale = theScale;
             }
-            HeroTrigger = true;
+            heroTrigger = true;
         }
         else if (hitRight.transform != null)
         {
-            Speed = 2f;
-            RbSkeleton.velocity = new Vector2(Vector3.right.x * Speed, RbSkeleton.velocity.y);
+            speed = 2f;
+            rbSkeleton.velocity = new Vector2(Vector3.right.x * speed, rbSkeleton.velocity.y);
             Vector3 theScale = transform.localScale;
-            AnimCharacterMove.SetFloat("Speed", Mathf.Abs(Speed));
+            animCharacterMove.SetFloat("Speed", Mathf.Abs(speed));
             if (theScale.x < 0)
             {
                 theScale.x *= -1;
                 transform.localScale = theScale;
             }
-            HeroTrigger = true;
+            heroTrigger = true;
         }
         else
         {
-            Speed = 0f;
-            HeroTrigger = false;
+            speed = 0f;
+            heroTrigger = false;
         }
-        AnimCharacterMove.SetFloat("Speed", Mathf.Abs(Speed));
+        animCharacterMove.SetFloat("Speed", Mathf.Abs(speed));
 
-        if (!HeroTrigger)
-            RbSkeleton.velocity = new Vector2(0f, RbSkeleton.velocity.y);
+        if (!heroTrigger)
+            rbSkeleton.velocity = new Vector2(0f, rbSkeleton.velocity.y);
     }
     IEnumerator DamageWait()
     {
@@ -81,15 +81,15 @@ public class EnemySkeleton : MonoBehaviour
         shootPoint.SetActive(true);
         yield return new WaitForSeconds(1.45f);
         shootPoint.SetActive(false);
-        AnimCharacterMove.SetBool("Attack", false);
+        animCharacterMove.SetBool("Attack", false);
         isReadyAttack = true;
     }
     public void Damage(int dmg)
     {
-        LifePoints -= dmg;
-        if (LifePoints < 0)
+        lifePoints -= dmg;
+        if (lifePoints < 0)
         {
-            LifePoints = 0;
+            lifePoints = 0;
         }
     }
     void Dead()

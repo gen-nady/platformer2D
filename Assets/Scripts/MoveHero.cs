@@ -4,60 +4,60 @@ using UnityEngine.UI;
 public class MoveHero : MonoBehaviour
 {
     [SerializeField]
-    Rigidbody2D RbHero;
+    Rigidbody2D rbHero;
     [SerializeField]
-    Animator AnimCharacterMove;
+    Animator animCharacterMove;
     [Header("Движение")]
-    public float Speed;
-    public Transform GroundCheck;
-    static readonly float GroundRadius = 0.2f;
-    public LayerMask WhatIsGround;
-    int Move;
-    public bool IsHeroRight = true;
-    bool IsGrounded;
+    public float speed;
+    public Transform groundCheck;
+    static readonly float groundRadius = 0.2f;
+    public LayerMask whatIsGround;
+    int move;
+    public bool isHeroRight = true;
+    bool isGrounded;
     [Header("Атака")]
-    bool IsReadyAttackHero = true;
-    public GameObject AttackPosition;
+    bool isReadyAttackHero = true;
+    public GameObject attackPosition;
     [Header("Монеты")]
-    public Text CoinT;
-    int Coin;
+    public Text coinText;
+    int coin;
     [Header("Жизни")]
-    int LifePoints = 3;
+    int lifePoints = 3;
     [SerializeField]
     public int manaPoints = 3;
     [SerializeField]
-    Image[] Life_Point, LifePointSprite, manaPoint,manaPointSprite;
+    Image[] lifePoint, lifePointSprite, manaPoint,manaPointSprite;
     [Header("Лестницы")]
-    bool IsStairs = false;
-    bool IsStairsGo = false;
+    bool isStairs = false;
+    bool isStairsGo = false;
     void Start()
     {
-        Coin = PlayerPrefs.GetInt("Coin");
-        CoinT.text = Coin.ToString();
+        coin = PlayerPrefs.GetInt("Coin");
+        coinText.text = coin.ToString();
     }
 
     [System.Obsolete]
     void FixedUpdate()
     {
-        IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundRadius, WhatIsGround);
-        AnimCharacterMove.SetBool("Ground", IsGrounded);
-        AnimCharacterMove.SetFloat("vSpeed", RbHero.velocity.y);
-        AnimCharacterMove.SetFloat("Speed", Mathf.Abs(Move));
-        if (IsStairs && IsStairsGo)
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        animCharacterMove.SetBool("Ground", isGrounded);
+        animCharacterMove.SetFloat("vSpeed", rbHero.velocity.y);
+        animCharacterMove.SetFloat("Speed", Mathf.Abs(move));
+        if (isStairs && isStairsGo)
         {
-            RbHero.velocity = new Vector2(0, 175*Time.fixedDeltaTime);
+            rbHero.velocity = new Vector2(0, 175*Time.fixedDeltaTime);
         }
-        RbHero.velocity = new Vector2(Move * Speed, RbHero.velocity.y);
-        if (Move > 0 && !IsHeroRight)
+        rbHero.velocity = new Vector2(move * speed, rbHero.velocity.y);
+        if (move > 0 && !isHeroRight)
         {
             Flip();
         }
         //обратная ситуация. отражаем персонажа влево
-        else if (Move < 0 && IsHeroRight)
+        else if (move < 0 && isHeroRight)
         {
             Flip();
         }
-        if (LifePoints == 0)
+        if (lifePoints == 0)
         {
             Dead();
         }
@@ -65,19 +65,19 @@ public class MoveHero : MonoBehaviour
     }
     public void ChangeLife()
     {
-        if (LifePoints > 3)
-            LifePoints = 3;
+        if (lifePoints > 3)
+            lifePoints = 3;
         if (manaPoints > 3)
             manaPoints = 3;
-        for (int i = 0; i < Life_Point.Length; i++)
+        for (int i = 0; i < lifePoint.Length; i++)
         {
-            if (i < LifePoints)
+            if (i < lifePoints)
             {
-                Life_Point[i].sprite = LifePointSprite[0].sprite;
+                lifePoint[i].sprite = lifePointSprite[0].sprite;
             }
             else
             {
-                Life_Point[i].sprite = LifePointSprite[1].sprite;
+                lifePoint[i].sprite = lifePointSprite[1].sprite;
             }
         }
         for (int i = 0; i < manaPoint.Length; i++)
@@ -94,71 +94,71 @@ public class MoveHero : MonoBehaviour
     }
     private void Flip()
     {
-        IsHeroRight = !IsHeroRight;
+        isHeroRight = !isHeroRight;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
     }
     public void MoveRightHero()
     {
-        Move = 1;
+        move = 1;
     }
     public void MoveLeftHero()
     {
-        Move = -1;
+        move = -1;
     }
     public void MoveHeroUp()
     {
-        Move = 0;
+        move = 0;
     }
     public void MoveJumpHero()
     {
-        IsStairsGo = true;
-        if (IsGrounded &&!IsStairs)
+        isStairsGo = true;
+        if (isGrounded &&!isStairs)
         {
             //устанавливаем в аниматоре переменную в false
-            AnimCharacterMove.SetBool("Ground", false);
+            animCharacterMove.SetBool("Ground", false);
             //прикладываем силу вверх, чтобы персонаж подпрыгнул
-            RbHero.AddForce(new Vector2(0, 475));
+            rbHero.AddForce(new Vector2(0, 475));
         }
     }
     public void IsStairsV()
     {
-        IsStairsGo = false;
+        isStairsGo = false;
     }
     public void HeroAttack()
     {
-        if (IsReadyAttackHero && IsGrounded)
+        if (isReadyAttackHero && isGrounded)
         {
-            AnimCharacterMove.SetBool("Attack", true);
-            IsReadyAttackHero = false;
+            animCharacterMove.SetBool("Attack", true);
+            isReadyAttackHero = false;
             StartCoroutine(DamageWait());
         }
     }
     public void Damage(int dmg)
     {
-        LifePoints -= dmg;
+        lifePoints -= dmg;
         ChangeLife();
-        if (LifePoints < 0)
+        if (lifePoints < 0)
         {
-            LifePoints = 0;
+            lifePoints = 0;
         }
     }
     IEnumerator DamageWait()
     {
-        AttackPosition.SetActive(true);
+        attackPosition.SetActive(true);
         yield return new WaitForSeconds(0.35f);
-        AttackPosition.SetActive(false);
-        AnimCharacterMove.SetBool("Attack", false);
-        IsReadyAttackHero = true;
+        attackPosition.SetActive(false);
+        animCharacterMove.SetBool("Attack", false);
+        isReadyAttackHero = true;
     }
     //проверка для прыжка
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.CompareTag("Coin"))
         {
-            Coin++;
-            CoinT.text = Coin.ToString();
+            coin++;
+            coinText.text = coin.ToString();
             Destroy(coll.gameObject);
         }
     }
@@ -177,7 +177,7 @@ public class MoveHero : MonoBehaviour
         }
         if (coll.gameObject.CompareTag("Potions"))
         {
-            LifePoints += 2;
+            lifePoints += 2;
             ChangeLife();
             Destroy(coll.gameObject);
         }
@@ -197,16 +197,16 @@ public class MoveHero : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Ladder"))
         {
-            IsStairs = true;
-            RbHero.gravityScale = 0.4f;
+            isStairs = true;
+            rbHero.gravityScale = 0.4f;
         }   
     }
     void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("Ladder"))
         {
-            IsStairs = false;
-            RbHero.gravityScale = 1f;      
+            isStairs = false;
+            rbHero.gravityScale = 1f;      
         }
     }
 
@@ -220,7 +220,7 @@ public class MoveHero : MonoBehaviour
     //сохранение игры
     public void SaveGame()
     {
-        PlayerPrefs.SetInt("Coin", Coin);
+        PlayerPrefs.SetInt("Coin", coin);
     }
     private void OnApplicationQuit()
     {
