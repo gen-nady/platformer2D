@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using UnityEngine;
 public class EnemyOneAttack : MonoBehaviour
-{   
+{
     public Transform shootPoint;
     public GameObject bullet, coin;
     public int lifePoints;
     Animator animCharacterMove;
     void Start()
     {
+        float startShoot = 0.8f, repeatShoot = 2.5f;
         animCharacterMove = GetComponent<Animator>();
-        InvokeRepeating("Shoot",0.8f,2.5f); //0.8 поскольку в анимации на 0.8 секунду начинает срабатывать атака
+        InvokeRepeating("Shoot", startShoot, repeatShoot); //0.8 поскольку в анимации на 0.8 секунду начинает срабатывать атака
     }
     private void FixedUpdate()
     {
@@ -23,7 +24,7 @@ public class EnemyOneAttack : MonoBehaviour
     {
         animCharacterMove.SetBool("EnemyOneIsDamage", false);
         GameObject bulletInstantiate = Instantiate(bullet, shootPoint.position, Quaternion.identity) as GameObject;
-        Destroy(bulletInstantiate, 2);
+        Destroy(bulletInstantiate, 2f);
     }
     //нанесесние урона
     public void Damage(int dmg)
@@ -40,7 +41,6 @@ public class EnemyOneAttack : MonoBehaviour
     }
     IEnumerator DeadFX()
     {
-
         animCharacterMove.SetBool("EnemyOneIsDead", true);
         yield return new WaitForSeconds(0.4f);
         Destroy(gameObject);

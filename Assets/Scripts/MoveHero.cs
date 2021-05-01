@@ -26,7 +26,7 @@ public class MoveHero : MonoBehaviour
     [SerializeField]
     public int manaPoints = 3;
     [SerializeField]
-    Image[] lifePoint, lifePointSprite, manaPoint,manaPointSprite;
+    Image[] lifePoint, lifePointSprite, manaPoint, manaPointSprite;
     [Header("Лестницы")]
     bool isStairs = false;
     bool isStairsGo = false;
@@ -35,7 +35,6 @@ public class MoveHero : MonoBehaviour
         coin = PlayerPrefs.GetInt("Coin");
         coinText.text = coin.ToString();
     }
-
     [System.Obsolete]
     void FixedUpdate()
     {
@@ -45,7 +44,7 @@ public class MoveHero : MonoBehaviour
         animCharacterMove.SetFloat("Speed", Mathf.Abs(move));
         if (isStairs && isStairsGo)
         {
-            rbHero.velocity = new Vector2(0, 175*Time.fixedDeltaTime);
+            rbHero.velocity = new Vector2(0, 175 * Time.fixedDeltaTime);
         }
         rbHero.velocity = new Vector2(move * speed, rbHero.velocity.y);
         if (move > 0 && !isHeroRight)
@@ -114,7 +113,7 @@ public class MoveHero : MonoBehaviour
     public void MoveJumpHero()
     {
         isStairsGo = true;
-        if (isGrounded &&!isStairs)
+        if (isGrounded && !isStairs)
         {
             //устанавливаем в аниматоре переменную в false
             animCharacterMove.SetBool("Ground", false);
@@ -162,7 +161,6 @@ public class MoveHero : MonoBehaviour
             Destroy(coll.gameObject);
         }
     }
-
     [System.Obsolete]
     void OnTriggerEnter2D(Collider2D coll)
     {
@@ -199,17 +197,16 @@ public class MoveHero : MonoBehaviour
         {
             isStairs = true;
             rbHero.gravityScale = 0.4f;
-        }   
+        }
     }
     void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("Ladder"))
         {
             isStairs = false;
-            rbHero.gravityScale = 1f;      
+            rbHero.gravityScale = 1f;
         }
     }
-
     [System.Obsolete]
     void Dead()
     {

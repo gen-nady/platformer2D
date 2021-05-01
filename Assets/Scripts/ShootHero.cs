@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 public class ShootHero : MonoBehaviour
 {
     public Transform shootPoint;
@@ -7,7 +6,7 @@ public class ShootHero : MonoBehaviour
     static MoveHero mvHero;
     private void Start()
     {
-        mvHero = GetComponent<MoveHero>();  
+        mvHero = GetComponent<MoveHero>();
     }
     public void Shoot()
     {

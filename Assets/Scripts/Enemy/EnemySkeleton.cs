@@ -32,17 +32,15 @@ public class EnemySkeleton : MonoBehaviour
             rbSkeleton.velocity = new Vector2(0f, rbSkeleton.velocity.y);
             if (isReadyAttack)
             {
-                
                 isReadyAttack = false;
                 animCharacterMove.SetBool("Attack", true);
                 StartCoroutine(DamageWait());
             }
-
         }
         else if (hitLeft.transform != null)
         {
             speed = 2f;
-            rbSkeleton.velocity = new Vector2(Vector3.left.x *speed, rbSkeleton.velocity.y);
+            rbSkeleton.velocity = new Vector2(Vector3.left.x * speed, rbSkeleton.velocity.y);
             Vector3 theScale = transform.localScale;
             animCharacterMove.SetFloat("Speed", Mathf.Abs(speed));
             if (theScale.x > 0)
@@ -104,7 +102,6 @@ public class EnemySkeleton : MonoBehaviour
             Damage(5);
             Destroy(coll.gameObject);
         }
-
     }
     private void OnTriggerEnter2D(Collider2D coll)
     {
